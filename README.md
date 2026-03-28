@@ -68,7 +68,7 @@ python train.py \
 | `--pretrained_model_name` | `PixArt-alpha/PixArt-XL-2-1024-MS` | Base model |
 | `--resolution` | `1024` | Image resolution (512 or 1024) |
 | `--lora_rank` | `16` | LoRA rank (8–32 typical) |
-| `--lora_alpha` | `2 * rank` | LoRA scaling factor |
+| `--lora_alpha` | `32` | LoRA scaling factor |
 | `--num_train_epochs` | `25` | Training epochs |
 | `--save_steps` | `500` | Checkpoint save frequency |
 | `--learning_rate` | `5e-6` | Learning rate |
