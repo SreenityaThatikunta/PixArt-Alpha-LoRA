@@ -4,18 +4,17 @@ Fine-tuning [PixArt-Alpha](https://huggingface.co/PixArt-alpha/PixArt-XL-2-1024-
 
 ## Demo
 
-[![Demo Video](https://img.shields.io/badge/YouTube-Demo-red?logo=youtube)](https://youtube.com/YOUR_VIDEO_LINK)
+[![Demo Video](https://img.shields.io/badge/YouTube-Demo-red?logo=youtube)](https://youtu.be/Aoez03xao6E)
 
-https://github.com/user-attachments/assets/YOUR_DEMO_VIDEO
 
 ## Links
 
 | Resource | Link |
 |----------|------|
 | GitHub | [github.com/SreenityaThatikunta/PixArt-Alpha-LoRA](https://github.com/SreenityaThatikunta/PixArt-Alpha-LoRA) |
-| Gradio Demo | [https://8e7034734be9949732.gradio.live/](https://kaggle-proxy-561j.onrender.com)) |
+| Gradio Demo | [kaggle-proxy-561j.onrender.com](https://kaggle-proxy-561j.onrender.com) |
 | W&B Dashboard | [wandb](https://wandb.ai/b23cm1007-indian-institute-of-technology-jodhpur/pixart-hands-lora/overview) |
-| YouTube | [youtube.com/YOUR_VIDEO](https://youtube.com/YOUR_VIDEO_LINK) |
+| YouTube | [youtu.be/Aoez03xao6E](https://youtu.be/Aoez03xao6E) |
 | LoRA Weights | [huggingface.co/arpita2desh/pixart-hands-lora](https://huggingface.co/arpita2desh/pixart-hands-lora) |
 
 ## Setup
