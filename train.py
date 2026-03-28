@@ -312,10 +312,7 @@ def train(args):
 
                 # 3. Add noise to latents (forward diffusion)
                 noisy_latents = noise_scheduler.add_noise(latents, noise, timesteps)
-
-                # print("DEBUG hidden_states:", noisy_latents.shape)
-                # print("DEBUG encoder_hidden_states:", encoder_hidden_states.shape)
-                # print("DEBUG encoder_attention_mask:", encoder_attention_mask.shape)
+                
                 # 5. Predict noise with transformer
                 resolution    = torch.tensor([[args.resolution, args.resolution]] * bsz, device=device, dtype=dtype)
                 aspect_ratio  = torch.tensor([[1.0]] * bsz, device=device, dtype=dtype)
@@ -349,11 +346,6 @@ def train(args):
                 if global_step % args.save_steps == 0:
                     save_lora_checkpoint(transformer, args.output_dir, global_step)
 
-                # if args.use_wandb:
-                #     import wandb
-                #     wandb.log({"loss": loss.item() * args.gradient_accumulation_steps,
-                #                "lr": lr_scheduler.get_last_lr()[0],
-                #                "step": global_step})
                 if args.use_wandb:
                     import wandb
                     wandb.log({
@@ -380,15 +372,6 @@ def train(args):
                             transformer=transformer,
                             torch_dtype=torch.float16,
                         ).to(device)
-
-                        # pipe = PixArtAlphaPipeline.from_pretrained(
-                        #     args.pretrained_model_name,
-                        #     transformer=transformer,   # inject current in-memory transformer
-                        #     torch_dtype=torch.float16,
-                        #     vae=vae,                   # reuse already-loaded VAE
-                        #     text_encoder=text_encoder, # reuse already-loaded text encoder
-                        #     tokenizer=tokenizer,
-                        # ).to(device)
 
                         with torch.no_grad():
                             images = pipe(
