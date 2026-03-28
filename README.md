@@ -170,7 +170,7 @@ python evaluate.py \
 
 **Key design choices:**
 - Only the DiT attention projections are adapted via LoRA — VAE and T5 text encoder stay frozen
-- LoRA checkpoints are ~10–50 MB vs. the full model's ~6 GB
+- LoRA checkpoints are ~10–50 MB vs. the full model's ~26 GB
 - Merged models can be used standalone without PEFT at inference time
 
 ## Project Structure
