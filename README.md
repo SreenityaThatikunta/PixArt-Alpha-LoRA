@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/YOUR_DEMO_VIDEO
 | Resource | Link |
 |----------|------|
 | GitHub | [github.com/SreenityaThatikunta/PixArt-Alpha-LoRA](https://github.com/SreenityaThatikunta/PixArt-Alpha-LoRA) |
-| Gradio Demo | [8e7034734be9949732.gradio.live/](https://8e7034734be9949732.gradio.live/) |
+| Gradio Demo | [https://8e7034734be9949732.gradio.live/](https://kaggle-proxy-561j.onrender.com)) |
 | W&B Dashboard | [wandb](https://wandb.ai/b23cm1007-indian-institute-of-technology-jodhpur/pixart-hands-lora/overview) |
 | YouTube | [youtube.com/YOUR_VIDEO](https://youtube.com/YOUR_VIDEO_LINK) |
 | LoRA Weights | [huggingface.co/arpita2desh/pixart-hands-lora](https://huggingface.co/arpita2desh/pixart-hands-lora) |
