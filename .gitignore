@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Datasets & generated artifacts
+hands_dataset/
+images_real/
+images_gen/
+generated_images/
+captions.json
+*.jpg
+*.jpeg
+!assets/*
+# Keep the README figures tracked
+!assets/*.png
+
+# Model outputs
+lora_hands_output/
+checkpoint-*/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+
+# Logs
+wandb/
+runs/
+*.log
+
+# Third-party eval repo (cloned by the user, see README)
+T2I-CompBench/

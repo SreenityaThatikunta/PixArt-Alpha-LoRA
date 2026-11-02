@@ -1,0 +1,23 @@
+# Core
+torch>=2.1.0
+torchvision>=0.16.0
+
+# Diffusion / PEFT
+diffusers>=0.27.0
+transformers>=4.38.0
+peft>=0.9.0
+accelerate>=0.27.0
+sentencepiece>=0.1.99          # required by the T5 tokenizer
+safetensors>=0.4.0
+
+# Data & utilities
+Pillow>=10.0.0
+numpy>=1.24.0
+tqdm>=4.66.0
+huggingface-hub>=0.21.0
+
+# Evaluation
+clean-fid>=0.1.35
+
+# Experiment tracking
+wandb>=0.16.0
