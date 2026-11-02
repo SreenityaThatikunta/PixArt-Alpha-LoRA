@@ -1,0 +1,14 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+# Notebooks re-import modules per cell on purpose, so each cell runs standalone.
+extend-exclude = ["*.ipynb"]
+
+[tool.ruff.lint]
+# Pragmatic set for a research codebase: real errors, not style nits.
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E741"]  # ambiguous names like `l` are common in tensor code
