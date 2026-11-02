@@ -37,7 +37,11 @@ def test_readme_project_structure_files_exist():
     block = re.search(r"## Project Structure\s*```(.*?)```", readme, re.S)
     assert block, "README is missing its Project Structure block"
 
-    listed = re.findall(r"[├└]──\s+(\S+)", block.group(1))
+    # Paths may contain spaces, so take everything up to the comment column.
+    listed = [
+        match.group(1).strip()
+        for match in re.finditer(r"[├└]──\s+(.+?)(?:\s{2,}#.*)?$", block.group(1), re.M)
+    ]
     assert listed, "Project Structure block lists no files"
 
     missing = [name for name in listed if not (REPO_ROOT / name).exists()]
