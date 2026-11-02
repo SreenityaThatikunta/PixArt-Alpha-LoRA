@@ -40,7 +40,7 @@ Quantitative evaluation on 3,000 curated hand images, FID computed with `clean-f
 - `checkpoint-500` already shows visible finger separation; the merged model gives the best anatomy across all prompts tested.
 - General-domain quality does not regress: COCO-prompt outputs stay sharp after fine-tuning (see `assets/coco_comparison.png`).
 
-**Honest limitation:** FID and T2I-CompBench are not hand-specific metrics. Neither directly measures finger count or joint plausibility, so the anatomical claim rests partly on the qualitative grids above. A hand-landmark detector or a human study would make it rigorous. T2I-CompBench tooling is wired up in `evaluate.py`, but we report no CompBench numbers because we did not complete a full benchmark run.
+**Honest limitation:** FID and T2I-CompBench are not hand-specific metrics. Neither directly measures finger count or joint plausibility, so the anatomical claim rests partly on the qualitative grids above. A hand-landmark detector or a human study would make it rigorous. T2I-CompBench tooling is wired up in `scripts/evaluate.py`, but we report no CompBench numbers because we did not complete a full benchmark run.
 
 ---
 
@@ -57,7 +57,7 @@ cp .env.example .env     # add your W&B / HF tokens if you plan to train or push
 Then generate images from the published adapter — no training required:
 
 ```bash
-python generate_images.py --captions captions.json --output_dir generated_images --hf_repo arpita2desh/pixart-hands-lora --checkpoint checkpoint-500 --device cuda:0
+python scripts/generate_images.py --captions captions.json --output_dir generated_images --hf_repo arpita2desh/pixart-hands-lora --checkpoint checkpoint-500 --device cuda:0
 ```
 
 **Requirements:** Python 3.11+ (the current torch release requires it), a CUDA-capable GPU. Inference needs roughly 12 GB VRAM at 512px; training at 1024px with batch size 2 needs ~24 GB. The base model is a ~26 GB download on first run.
@@ -68,14 +68,14 @@ python generate_images.py --captions captions.json --output_dir generated_images
 
 ### 1. Dataset
 
-Assembled from [11K Hands](https://sites.google.com/view/11khands) (11,076 images, clean backgrounds, consistent lighting) and [FreiHAND](https://lmb.informatik.uni-freiburg.de/projects/freihand/) (130,240 in-the-wild poses). We select 3,000 images filtered for sharpness and pose diversity — see `dataset.ipynb` for the selection pipeline, including the sharpness scoring and K-means pose clustering.
+Assembled from [11K Hands](https://sites.google.com/view/11khands) (11,076 images, clean backgrounds, consistent lighting) and [FreiHAND](https://lmb.informatik.uni-freiburg.de/projects/freihand/) (130,240 in-the-wild poses). We select 3,000 images filtered for sharpness and pose diversity — see `notebooks/dataset.ipynb` for the selection pipeline, including the sharpness scoring and K-means pose clustering.
 
 ### 2. Auto-captioning
 
 Raw hand datasets ship without the fine-grained descriptions LoRA needs, so captions are generated with LLaVA-Next (`llava-hf/llava-v1.6-mistral-7b-hf`):
 
 ```bash
-python generate_captions.py
+python scripts/generate_captions.py
 ```
 
 Outputs a JSON file mapping image filenames to dense descriptive captions.
@@ -85,7 +85,7 @@ Outputs a JSON file mapping image filenames to dense descriptive captions.
 This is the exact configuration behind the FID numbers above (Config C, 11K Hands only):
 
 ```bash
-python train.py \
+python scripts/train.py \
     --data_dir ./hands_dataset \
     --caption_file ./captions.json \
     --output_dir ./lora_hands_output \
@@ -126,7 +126,7 @@ python train.py \
 
 ```bash
 # FID only
-python evaluate.py --real_dir images_real --gen_dir images_gen --skip_compbench
+python scripts/evaluate.py --real_dir images_real --gen_dir images_gen --skip_compbench
 ```
 
 For T2I-CompBench, clone the benchmark first:
@@ -136,10 +136,10 @@ git clone https://github.com/Karine-Huang/T2I-CompBench.git && pip install -r T2
 ```
 
 ```bash
-python evaluate.py --real_dir images_real --gen_dir images_gen --compbench_dir ./T2I-CompBench --hf_repo arpita2desh/pixart-hands-lora --checkpoint checkpoint-500
+python scripts/evaluate.py --real_dir images_real --gen_dir images_gen --compbench_dir ./T2I-CompBench --hf_repo arpita2desh/pixart-hands-lora --checkpoint checkpoint-500
 ```
 
-`generate_samples.py` renders a fixed set of 10 hand prompts across the base model, every saved checkpoint, and the merged model, logging side-by-side grids to W&B.
+`scripts/generate_samples.py` renders a fixed set of 10 hand prompts across the base model, every saved checkpoint, and the merged model, logging side-by-side grids to W&B.
 
 ---
 
@@ -187,7 +187,7 @@ python evaluate.py --real_dir images_real --gen_dir images_gen --compbench_dir .
 - **Merging.** `--merge_weight` folds adapters into the base transformer, so the merged model runs standalone without PEFT at inference. We evaluate base, checkpoint, and merged variants as separate pipelines.
 - **512px over 1024px for training.** Halving resolution quartered the per-step cost, letting us run the full dataset-composition sweep within our compute budget.
 
-For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness scoring, and the full hyperparameter rationale — see [`TECHNICAL_DEEP_DIVE.md`](TECHNICAL_DEEP_DIVE.md).
+For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness scoring, and the full hyperparameter rationale — see [`docs/TECHNICAL_DEEP_DIVE.md`](docs/TECHNICAL_DEEP_DIVE.md).
 
 ---
 
@@ -198,8 +198,8 @@ For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness 
 | LoRA weights | [huggingface.co/arpita2desh/pixart-hands-lora](https://huggingface.co/arpita2desh/pixart-hands-lora) |
 | Demo video | [youtu.be/Aoez03xao6E](https://youtu.be/Aoez03xao6E) |
 | W&B dashboard | [training runs and sample grids](https://wandb.ai/b23cm1007-indian-institute-of-technology-jodhpur/pixart-hands-lora/overview) |
-| Report | [`DL_Report.pdf`](DL_Report.pdf) |
-| Presentation | [`DL_Presentation_Phase 2.pdf`](DL_Presentation_Phase%202.pdf) |
+| Report | [`DL_Report.pdf`](docs/DL_Report.pdf) |
+| Presentation | [`DL_Presentation_Phase 2.pdf`](docs/DL_Presentation_Phase%202.pdf) |
 | Gradio demo | [kaggle-proxy-561j.onrender.com](https://kaggle-proxy-561j.onrender.com) — hosted on a free tier, currently offline |
 
 ---
@@ -207,18 +207,22 @@ For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness 
 ## Project Structure
 
 ```
-├── train.py                  # LoRA fine-tuning script
-├── generate_images.py        # Batch image generation
-├── generate_samples.py       # Checkpoint comparison sampling with W&B
-├── generate_captions.py      # LLaVA-Next auto-captioning
-├── evaluate.py               # FID + T2I-CompBench evaluation
-├── dataset.ipynb             # Dataset assembly and filtering
-├── Gradio.ipynb              # Interactive demo
-├── tests/                    # Test suite
-├── assets/                   # README figures
-├── TECHNICAL_DEEP_DIVE.md    # Extended technical write-up
-├── DL_Report.pdf             # Project report
-└── DL_Presentation_Phase 2.pdf  # Project presentation
+├── scripts/                      # Command-line entry points
+│   ├── train.py                  # LoRA fine-tuning
+│   ├── generate_captions.py      # LLaVA-Next auto-captioning
+│   ├── generate_images.py        # Batch image generation
+│   ├── generate_samples.py       # Checkpoint comparison sampling with W&B
+│   └── evaluate.py               # FID + T2I-CompBench evaluation
+├── notebooks/
+│   ├── dataset.ipynb             # Dataset assembly and filtering
+│   └── Gradio.ipynb              # Interactive demo
+├── tests/                        # Test suite
+├── docs/
+│   ├── TECHNICAL_DEEP_DIVE.md    # Extended technical write-up
+│   ├── DL_Report.pdf             # Project report
+│   └── DL_Presentation_Phase 2.pdf   # Project presentation
+├── assets/                       # README figures
+└── requirements.txt              # Pinned dependencies
 ```
 
 ## Development

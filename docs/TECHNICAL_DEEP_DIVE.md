@@ -5,14 +5,14 @@ This document explains the project at the level expected in a technical intervie
 Reference materials used while preparing this file:
 
 - `README.md`
-- `train.py`
-- `generate_captions.py`
-- `generate_images.py`
-- `generate_samples.py`
-- `evaluate.py`
-- `dataset.ipynb`
-- `Gradio.ipynb`
-- `DL_Report.pdf` and `DL_Presentation.pdf` as project-report/presentation references
+- `scripts/train.py`
+- `scripts/generate_captions.py`
+- `scripts/generate_images.py`
+- `scripts/generate_samples.py`
+- `scripts/evaluate.py`
+- `notebooks/dataset.ipynb`
+- `notebooks/Gradio.ipynb`
+- `docs/DL_Report.pdf` and `docs/DL_Presentation_Phase 2.pdf` as project-report/presentation references
 
 ## 1. Project Summary
 
@@ -49,13 +49,13 @@ This project narrows the model adaptation target to a specific visual domain: re
 
 | File | Purpose |
 |---|---|
-| `dataset.ipynb` | Samples the training dataset using sharpness and pose-diversity heuristics. |
-| `generate_captions.py` | Uses LLaVA-Next to produce detailed captions for hand images. |
-| `train.py` | LoRA fine-tuning script for PixArt-Alpha. |
-| `generate_images.py` | Batch generation from a Hugging Face LoRA checkpoint. |
-| `generate_samples.py` | Generates fixed prompt samples for base, LoRA checkpoints, and merged model with W&B logging. |
-| `evaluate.py` | Computes FID and optionally runs T2I-CompBench evaluations. |
-| `Gradio.ipynb` | Demo notebook for comparing base, checkpoint, final, and merged models. |
+| `notebooks/dataset.ipynb` | Samples the training dataset using sharpness and pose-diversity heuristics. |
+| `scripts/generate_captions.py` | Uses LLaVA-Next to produce detailed captions for hand images. |
+| `scripts/train.py` | LoRA fine-tuning script for PixArt-Alpha. |
+| `scripts/generate_images.py` | Batch generation from a Hugging Face LoRA checkpoint. |
+| `scripts/generate_samples.py` | Generates fixed prompt samples for base, LoRA checkpoints, and merged model with W&B logging. |
+| `scripts/evaluate.py` | Computes FID and optionally runs T2I-CompBench evaluations. |
+| `notebooks/Gradio.ipynb` | Demo notebook for comparing base, checkpoint, final, and merged models. |
 | `README.md` | User-facing setup and usage guide. |
 
 ## 4. Core Model Architecture

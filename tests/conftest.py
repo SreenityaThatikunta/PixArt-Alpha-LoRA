@@ -2,7 +2,8 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS_DIR = REPO_ROOT / "scripts"
 
-# The training/eval scripts live at the repo root, not in a package.
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+# The CLI entry points are standalone scripts, not an installed package.
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
