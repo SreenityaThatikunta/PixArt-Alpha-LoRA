@@ -197,12 +197,12 @@ def run_compbench_eval(compbench_dir: str) -> dict:
     blip_out    = examples_dir / "annotation_blip" / "vqa_result.json"
 
     if not blip_script.exists():
-        print(f"  [SKIP] BLIPvqa_eval/BLIP_vqa.py not found")
+        print("  [SKIP] BLIPvqa_eval/BLIP_vqa.py not found")
     else:
         if blip_out.exists():
-            print(f"  ✓ BLIP-VQA cached — skipping re-run")
+            print("  ✓ BLIP-VQA cached — skipping re-run")
         else:
-            print(f"\n  Running BLIP-VQA (color / shape / texture)...")
+            print("\n  Running BLIP-VQA (color / shape / texture)...")
             subprocess.run(
                 [sys.executable, str(blip_script), "--out_dir", str(examples_dir) + "/"],
                 check=True,
@@ -219,12 +219,12 @@ def run_compbench_eval(compbench_dir: str) -> dict:
     spatial_out   = examples_dir / "labels" / "annotation_obj_detection_2d" / "vqa_result.json"
 
     if not unidet_script.exists():
-        print(f"  [SKIP] UniDet_eval/2D_spatial_eval.py not found")
+        print("  [SKIP] UniDet_eval/2D_spatial_eval.py not found")
     else:
         if spatial_out.exists():
-            print(f"  ✓ UniDet spatial cached — skipping re-run")
+            print("  ✓ UniDet spatial cached — skipping re-run")
         else:
-            print(f"\n  Running UniDet (spatial)...")
+            print("\n  Running UniDet (spatial)...")
             subprocess.run(
                 [sys.executable, str(unidet_script)],
                 check=True,
@@ -242,12 +242,12 @@ def run_compbench_eval(compbench_dir: str) -> dict:
     clip_saved  = examples_dir / "annotation_clip" / "vqa_result_nonspatial.json"
 
     if not clip_script.exists():
-        print(f"  [SKIP] CLIPScore_eval/CLIP_similarity.py not found")
+        print("  [SKIP] CLIPScore_eval/CLIP_similarity.py not found")
     else:
         if clip_saved.exists():
-            print(f"  ✓ CLIP non-spatial cached — skipping re-run")
+            print("  ✓ CLIP non-spatial cached — skipping re-run")
         else:
-            print(f"\n  Running CLIP (non-spatial)...")
+            print("\n  Running CLIP (non-spatial)...")
             if clip_base.exists():
                 clip_base.unlink()
             subprocess.run(
@@ -263,7 +263,7 @@ def run_compbench_eval(compbench_dir: str) -> dict:
                 shutil.copy(clip_base, clip_saved)
                 print(f"  ✓ Saved non-spatial result to {clip_saved.name}")
             else:
-                print(f"  [WARN] CLIP output not found after run")
+                print("  [WARN] CLIP output not found after run")
 
         if clip_saved.exists():
             avg = _read_vqa_json(clip_saved)
@@ -275,12 +275,12 @@ def run_compbench_eval(compbench_dir: str) -> dict:
     three_in_one_out    = examples_dir / "annotation_3_in_1" / "vqa_result.json"
 
     if not three_in_one_script.exists():
-        print(f"  [SKIP] 3_in_1_eval/3_in_1.py not found")
+        print("  [SKIP] 3_in_1_eval/3_in_1.py not found")
     else:
         if three_in_one_out.exists():
-            print(f"  ✓ 3-in-1 complex cached — skipping re-run")
+            print("  ✓ 3-in-1 complex cached — skipping re-run")
         else:
-            print(f"\n  Running 3-in-1 (complex)...")
+            print("\n  Running 3-in-1 (complex)...")
             subprocess.run(
                 [
                     sys.executable, str(three_in_one_script),

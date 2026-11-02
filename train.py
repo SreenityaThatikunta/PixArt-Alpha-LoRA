@@ -20,7 +20,6 @@ import os
 import json
 import argparse
 from pathlib import Path
-from typing import Optional
 
 import torch
 import torch.nn.functional as F
@@ -32,7 +31,7 @@ from tqdm import tqdm
 from diffusers import PixArtAlphaPipeline, AutoencoderKL, PixArtTransformer2DModel
 from diffusers.optimization import get_scheduler
 from transformers import T5EncoderModel, T5Tokenizer
-from peft import LoraConfig, get_peft_model, TaskType
+from peft import LoraConfig, get_peft_model
 
 
 # ─────────────────────────────────────────────

@@ -17,7 +17,6 @@ Dependencies:
     pip install "huggingface_hub==0.23.4"
 """
 
-import os
 import json
 import argparse
 import torch

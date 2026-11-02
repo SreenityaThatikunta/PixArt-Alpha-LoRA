@@ -1,6 +1,8 @@
 from transformers import LlavaNextProcessor, LlavaNextForConditionalGeneration
 from PIL import Image
-import torch, json, os
+import torch
+import json
+import os
 from tqdm import tqdm
 
 # ── Load model ──
