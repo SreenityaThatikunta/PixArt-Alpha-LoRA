@@ -200,7 +200,6 @@ For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness 
 | W&B dashboard | [training runs and sample grids](https://wandb.ai/b23cm1007-indian-institute-of-technology-jodhpur/pixart-hands-lora/overview) |
 | Report | [`DL_Report.pdf`](docs/DL_Report.pdf) |
 | Presentation | [`DL_Presentation_Phase 2.pdf`](docs/DL_Presentation_Phase%202.pdf) |
-| Gradio demo | [kaggle-proxy-561j.onrender.com](https://kaggle-proxy-561j.onrender.com) — hosted on a free tier, currently offline |
 
 ---
 
@@ -215,7 +214,7 @@ For a deeper walkthrough — noise scheduling, the captioning prompt, sharpness 
 │   └── evaluate.py               # FID + T2I-CompBench evaluation
 ├── notebooks/
 │   ├── dataset.ipynb             # Dataset assembly and filtering
-│   └── Gradio.ipynb              # Interactive demo
+│   └── Gradio.ipynb              # Gradio demo, run locally or on Kaggle
 ├── tests/                        # Test suite
 ├── docs/
 │   ├── TECHNICAL_DEEP_DIVE.md    # Extended technical write-up
